@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Video Game Reviews</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+
+    <script src="/javascripts/angularApp.js"></script>
+    <script src="/javascripts/config.js"></script>
+    <script src="/javascripts/authFactory.js"></script>
+    <script src="/javascripts/gamesFactory.js"></script>
+    <script src="/javascripts/mainController.js"></script>
+    <script src="/javascripts/gamesController.js"></script>
+    <script src="/javascripts/authController.js"></script>
+    <script src="/javascripts/navigationController.js"></script>
+
+    <style> .glyphicon-thumbs-up {
+            cursor: pointer
+        } </style>
+
+</head>
+<body ng-app="videoGameReviews">
+
+<nav class="navbar navbar-inverse" ng-controller="NavCtrl">
+    <ul class="nav navbar-nav">
+        <li class="active"><a ui-sref="home">Home</a></li>
+        <li ng-show="isLoggedIn()" class="active"><a ui-sref="rating">Game Ratings</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="text-uppercase" ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
+        <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log
+                Out </a></li>
+        <li ng-hide="isLoggedIn()"><a href="/#/login"><span class="glyphicon glyphicon-log-in"></span> Log In </a></li>
+        <li ng-hide="isLoggedIn()"><a href="/#/register"><span class="glyphicon glyphicon-user"></span> Register </a>
+        </li>
+    </ul>
+</nav>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <ui-view></ui-view>
+    </div>
+</div>
+
+</body>
+</html>

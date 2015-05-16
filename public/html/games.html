@@ -1,0 +1,63 @@
+<div class="page-header">
+<style>body {background-color:darkcyan}</style>
+<body>
+<div class="jumbotron">
+<div>
+    <h3>
+        <a ng-show="post.link" href="{{post.link}}">
+            {{post.title}}
+        </a>
+
+        <span ng-hide="post.link">{{post.title}}</span>
+    </h3>
+</div>
+
+<div style="overflow-y:scroll;max-height:238px;">
+    <div class="well well-sm" ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+
+        <span ng-click="incrementUpvotes(comment)">Like <span class="glyphicon glyphicon-thumbs-up"></span></span>
+
+        <span class="badge"
+                >  {{comment.upvotes}}</span> - by <span class="text-uppercase"><mark>{{comment.author}}</mark></span>
+
+        <span style="font-size:20px; margin-left:10px;"> {{comment.body}} -- {{comment.review}}</span>
+
+    </div>
+</div>
+<div ng-hide="isLoggedIn()">
+
+    <h3><a href="/#/login">Log In</a> or <a href="/#/register">Register</a> to add your own review of {{post.title}}
+    </h3>
+
+</div>
+
+<form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
+
+    <h3>Add a new review for {{post.title}}</h3>
+
+    <div class="form-group">
+
+        <input type="number"
+               min="1"
+               max="10"
+               class="form-control"
+               placeholder="Rating"
+               ng-model="body">
+
+    </div>
+
+    <div class="form-group">
+
+        <input type="text"
+               class="form-control"
+               placeholder="Comment"
+               ng-model="gameComments">
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Review</button>
+
+</form>
+</div>
+</body>
+</div>
